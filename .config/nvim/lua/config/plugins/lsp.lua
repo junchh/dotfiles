@@ -119,6 +119,7 @@ return {
 				"prettierd",
 				"somesass_ls",
 				"vue_ls",
+				"clang-format",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			local vue_language_server_path = vim.fn.stdpath("data")
@@ -212,19 +213,11 @@ return {
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return nil
-				else
-					return {
-						timeout_ms = 500,
-						lsp_format = "fallback",
-					}
-				end
+			format_on_save = function()
+				return {
+					timeout_ms = 500,
+					lsp_format = "fallback",
+				}
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -232,12 +225,18 @@ return {
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
+				c = { "clang-format", stop_after_first = true },
 				javascript = { "prettierd", stop_after_first = true },
 				typescript = { "prettierd", stop_after_first = true },
 				typescriptreact = { "prettierd", stop_after_first = true },
 				astro = { "prettierd", stop_after_first = true },
 				vue = { "prettierd", stop_after_first = true },
 				scss = { "prettierd", stop_after_first = true },
+			},
+			formatters = {
+				["clang-format"] = {
+					prepend_args = { "-style=file" },
+				},
 			},
 		},
 	},
