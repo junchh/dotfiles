@@ -101,6 +101,7 @@ return {
 				rust_analyzer = {},
 				astro = {},
 				eslint = {},
+				zls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
