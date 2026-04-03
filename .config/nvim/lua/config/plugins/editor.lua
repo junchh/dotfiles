@@ -83,6 +83,14 @@ return {
 							filetype = "snacks_layout_box",
 						},
 					},
+					custom_filter = function(buf_number)
+						local buf_name = vim.fn.bufname(buf_number)
+
+						if buf_name:match("IN") or buf_name:match("OUT") then
+							return false
+						end
+						return true
+					end,
 				},
 			})
 
