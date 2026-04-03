@@ -7,4 +7,11 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("i", "<M-BS>", "<C-W>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-BS>", "<C-W>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<CR>")
+vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<CR>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>h", "<cmd>:split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "<leader>a", "GVgg", { desc = "Select all" })
+
+vim.keymap.set("n", "<leader>r", function()
+	vim.cmd("! g++-15 -Wall -Wextra -Wconversion -O2 -std=c++23 " .. vim.api.nvim_buf_get_name(0) .. " -o main.out")
+	vim.cmd("! sh /Users/junchh/Documents/Tech/problem-solving/online-judge/runner.sh")
+end, { desc = "Run code" })
