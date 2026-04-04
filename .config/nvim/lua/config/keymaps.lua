@@ -13,15 +13,3 @@ vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<CR>", { desc = "Split vertically"
 vim.keymap.set("n", "<leader>h", "<cmd>:split<CR>", { desc = "Split horizontally" })
 vim.keymap.set("n", "<leader>a", "GVgg", { desc = "Select all" })
 vim.keymap.set("v", "p", "P", { noremap = true })
-
-vim.keymap.set("n", "<leader>r", function()
-	vim.cmd("! g++-15 -Wall -Wextra -Wconversion -O2 -std=c++23 " .. vim.api.nvim_buf_get_name(0) .. " -o main.out")
-	vim.cmd("! sh /Users/junchh/Documents/Tech/problem-solving/online-judge/runner.sh")
-end, { desc = "Run code" })
-
-vim.keymap.set("n", "<leader>i", function()
-	local original_win = vim.api.nvim_get_current_win()
-	vim.cmd("80vsplit /Users/junchh/Documents/Tech/problem-solving/online-judge/IN")
-	vim.cmd("split /Users/junchh/Documents/Tech/problem-solving/online-judge/OUT")
-	vim.api.nvim_set_current_win(original_win)
-end, { desc = "Open Input" })
