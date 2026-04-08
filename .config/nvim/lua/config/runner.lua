@@ -42,8 +42,21 @@ vim.keymap.set("n", "<leader>r", function()
 	open_file_in_popup("/Users/junchh/Documents/Tech/problem-solving/online-judge/OUT")
 end, { desc = "Run code" })
 
+local original_win = vim.api.nvim_get_current_win()
+local open = false
+
 vim.keymap.set("n", "<leader>i", function()
-	local original_win = vim.api.nvim_get_current_win()
-	vim.cmd("80vsplit /Users/junchh/Documents/Tech/problem-solving/online-judge/IN")
-	vim.api.nvim_set_current_win(original_win)
-end, { desc = "Open Input" })
+	if open then
+		open = false
+		local wins = vim.api.nvim_list_wins()
+		for _, win in ipairs(wins) do
+			if win ~= original_win then
+				vim.api.nvim_win_close(win, false)
+			end
+		end
+	else
+		open = true
+		vim.cmd("80vsplit /Users/junchh/Documents/Tech/problem-solving/online-judge/IN")
+		vim.api.nvim_set_current_win(original_win)
+	end
+end, { desc = "Toggle input" })

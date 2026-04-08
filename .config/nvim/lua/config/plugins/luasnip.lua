@@ -64,6 +64,36 @@ return {
 			s("mov", {
 				t("pair<int, int> mov[4] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};"),
 			}),
+			s("bpow", {
+				t({
+					"ll binpow(ll a, ll b, ll m) {",
+					"\ta = a % m;",
+					"\tll res = 1;",
+					"\twhile (b > 0) {",
+					"\t\tif (b & 1)",
+					"\t\t\tres = (res * a) % m;",
+					"\t\ta = (a * a) % m;",
+					"\t\tb >>= 1;",
+					"\t}",
+					"\treturn res;",
+					"}",
+				}),
+			}),
+			s("bpmod", {
+				t({
+					"ll binpow(ll a, ll b) {",
+					"\ta = a % MOD;",
+					"\tll res = 1;",
+					"\twhile (b > 0) {",
+					"\t\tif (b & 1)",
+					"\t\t\tres = (res * a) % MOD;",
+					"\t\ta = (a * a) % MOD;",
+					"\t\tb >>= 1;",
+					"\t}",
+					"\treturn res;",
+					"}",
+				}),
+			}),
 		})
 	end,
 }
